@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/image_2"
+    >
+
+    <!-- layout/*.xml -->
+    <View
+        android:id="@+id/image_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+    <TextView
+
+        android:id="@+id/welcome_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center_horizontal|center"
+        android:text="@string/welcome_text"
+        android:textColor="@android:color/background_light"
+        android:textSize="48dp"
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/preshTic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="62dp"
+        android:fontFamily="@font/pacifico"
+        android:gravity="center_horizontal|center"
+        android:text="@string/p_tic"
+        android:textAlignment="center"
+        android:textColor="#FF6F00"
+        android:textSize="58dp" />
+
+    <TextView
+
+        android:id="@+id/whatWould"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/preshTic"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center_horizontal|center"
+        android:text="@string/what_would"
+        android:textColor="@android:color/background_light"
+        android:textSize="24dp" />
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/whatWould"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/green_rectangle"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center_horizontal|center"
+        android:onClick="newGame"
+        android:text="@string/new_game"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+    <!--<Button-->
+        <!--android:id="@+id/resumeButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_alignStart="@+id/playButton"-->
+        <!--android:layout_below="@+id/playButton"-->
+        <!--android:layout_marginTop="7dp"-->
+        <!--android:background="@drawable/blue_rectangle"-->
+        <!--android:fontFamily="@font/abril_fatface"-->
+        <!--android:gravity="center_horizontal|center"-->
+        <!--android:onClick="resumeGame"-->
+        <!--android:text="@string/resume_game"-->
+        <!--android:textColor="#616161"-->
+        <!--android:textSize="16sp" />-->
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/playButton"
+        android:layout_below="@+id/playButton"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/red_rectangle"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center_horizontal|center"
+        android:text="@string/settings"
+        android:textColor="#616161"
+        android:textSize="16sp"
+        android:onClick="settingsPage"
+        />
+</RelativeLayout>
+

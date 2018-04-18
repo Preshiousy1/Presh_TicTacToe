@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/image_3"
+    tools:ignore="ExtraText">
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/small_green_rec"
+        android:fontFamily="@font/abril_fatface"
+        android:text="@string/back_button"
+        android:onClick="welcome_page"
+        />
+
+    <TextView
+        android:id="@+id/settingsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/backButton"
+        android:layout_centerInParent="true"
+        android:layout_margin="4dp"
+        android:fontFamily="@font/pacifico"
+        android:text="@string/s_settings"
+        android:textColor="@color/colorAccent"
+        android:textSize="48sp" />
+
+    <Spinner
+        android:id="@+id/choosePlayersSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/settingsText"
+        android:entries="@array/_players"
+        android:prompt="@string/players_prompt"
+        android:layout_margin="24dp"
+        android:background="@drawable/pink_rectangle"
+        android:fontFamily="@font/abril_fatface"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/chooseBoardSizeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/choosePlayersSpinner"
+        android:layout_margin="24dp"
+        android:background="@drawable/pink_rectangle"
+        android:entries="@array/_boardSizes"
+        android:fontFamily="@font/abril_fatface"
+        android:prompt="@string/board_prompt"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/chooseBoardSizeSpinner"
+        android:layout_below="@+id/chooseBoardSizeSpinner"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="25dp"
+        android:checked="false"
+        android:fontFamily="@font/abril_fatface"
+        android:text="@string/music"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="24dp"
+        android:fontFamily="@font/abril_fatface"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/submitButton" />
+
+
+</RelativeLayout>
