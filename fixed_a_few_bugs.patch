@@ -1,0 +1,626 @@
+Index: app/src/main/java/com/example/android/presh_tic_tac_toe/SettingsActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/presh_tic_tac_toe/SettingsActivity.java	(revision e73fc6f0adf61fcb8c15a25b2f3d129502158911)
++++ app/src/main/java/com/example/android/presh_tic_tac_toe/SettingsActivity.java	(revision 77cab5f13999c9e9565cff2de8393538b901028d)
+@@ -14,6 +14,7 @@
+     public static String Spinner1ItemSelected;
+     public static String Spinner2ItemSelected;
+     private Button btnSubmit;
++    public static boolean settingsChange;
+ 
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+@@ -66,6 +67,7 @@
+                         Toast.LENGTH_SHORT).show();
+                 Spinner1ItemSelected = "" + String.valueOf(spinner1.getSelectedItem());
+                 Spinner2ItemSelected = "" + String.valueOf(spinner2.getSelectedItem());
++                settingsChange = true;
+                 welcome_page2();
+             }
+ 
+Index: app/src/main/java/com/example/android/presh_tic_tac_toe/WelcomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/presh_tic_tac_toe/WelcomePage.java	(revision e73fc6f0adf61fcb8c15a25b2f3d129502158911)
++++ app/src/main/java/com/example/android/presh_tic_tac_toe/WelcomePage.java	(revision 77cab5f13999c9e9565cff2de8393538b901028d)
+@@ -1,12 +1,15 @@
+ package com.example.android.presh_tic_tac_toe;
+ 
++import android.app.Activity;
+ import android.content.Intent;
+ import android.support.v7.app.AppCompatActivity;
+ import android.os.Bundle;
+ import android.view.View;
++import android.widget.Button;
+ 
+ public class WelcomePage extends AppCompatActivity {
+ 
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -22,58 +25,55 @@
+ //    }
+ 
+     public void newGame(View view) {
+-        if (SettingsActivity.Spinner1ItemSelected.equals("1 Player")
+-                && SettingsActivity.Spinner2ItemSelected.equals("3")
+-                 ) {
+-            Intent intent = new Intent(this, _3X3Activity.class);
+-            // _3X3Activity.resetGame();
+-            startActivity(intent);
++        if (!SettingsActivity.settingsChange){
++            Intent intent = new Intent(this, _3X3Activity.class);
++
++            startActivity(intent);
++        }
++        else {
++            if (SettingsActivity.Spinner1ItemSelected.equals("1 Player")
++                    && SettingsActivity.Spinner2ItemSelected.equals("3")
++                    ) {
++                Intent intent = new Intent(this, _3X3Activity.class);
++               _3X3Activity.numOfPlayers = true;
++                startActivity(intent);
+ 
+-        }
+-
+-
+-        else if (SettingsActivity.Spinner2ItemSelected.equals("3")
+-                && SettingsActivity.Spinner1ItemSelected.equals("2 Players")) {
+-            Intent intent = new Intent(this, _3X3Activity.class);
+-            // _3X3Activity.resetGame();
+-            startActivity(intent);
+-        }
+-
+-
+-        else if (SettingsActivity.Spinner2ItemSelected.equals("4")
+-                && SettingsActivity.Spinner1ItemSelected.equals("1 Player"))
+-        {
+-            Intent intent = new Intent(this, _4x4Activity.class);
+-            startActivity(intent);
+-            _4x4Activity.numOfPlayers = "1 Player";
+-        }
+-
+-
+-        else if (SettingsActivity.Spinner2ItemSelected.equals("4")
+-                && SettingsActivity.Spinner1ItemSelected.equals("2 Players"))
+-        {
+-            Intent intent = new Intent(this, _4x4Activity.class);
+-            startActivity(intent);
+-            _4x4Activity.numOfPlayers = "2 Players";
+-        }
+-
+-        else if (SettingsActivity.Spinner2ItemSelected.equals("5")
+-                && SettingsActivity.Spinner1ItemSelected.equals("1 Player"))
+-        {
+-            Intent intent = new Intent(this, _5x5Activity.class);
+-            startActivity(intent);
+-            _5x5Activity.numOfPlayers = "1 Player";
+-        }
+-
+-        else
+-        {
+-            Intent intent = new Intent(this, _5x5Activity.class);
+-            startActivity(intent);
++            } else if (SettingsActivity.Spinner2ItemSelected.equals("3")
++                    && SettingsActivity.Spinner1ItemSelected.equals("2 Players")) {
++                Intent intent = new Intent(this, _3X3Activity.class);
++                _3X3Activity.numOfPlayers = false;
++                startActivity(intent);
++            } else if (SettingsActivity.Spinner2ItemSelected.equals("4")
++                    && SettingsActivity.Spinner1ItemSelected.equals("1 Player")) {
++                Intent intent = new Intent(this, _4x4Activity.class);
++                startActivity(intent);
++                _4x4Activity.numOfPlayers = true;
++            } else if (SettingsActivity.Spinner2ItemSelected.equals("4")
++                    && SettingsActivity.Spinner1ItemSelected.equals("2 Players")) {
++                Intent intent = new Intent(this, _4x4Activity.class);
++                startActivity(intent);
++                _4x4Activity.numOfPlayers = false;
++            } else if (SettingsActivity.Spinner2ItemSelected.equals("5")
++                    && SettingsActivity.Spinner1ItemSelected.equals("1 Player")) {
++                Intent intent = new Intent(this, _5x5Activity.class);
++                startActivity(intent);
++                _5x5Activity.numOfPlayers = true;
++            } else {
++                Intent intent = new Intent(this, _5x5Activity.class);
++                startActivity(intent);
++            }
+         }
++
++
+ 
+     }
+   public void settingsPage(View view) {
+         Intent intent = new Intent(this, SettingsActivity.class);
+         startActivity(intent);
+     }
++
++    public void exitGame(View view) {
++        finish();
++        System.exit(0);
++    }
+ }
+Index: app/src/main/java/com/example/android/presh_tic_tac_toe/_3X3Activity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/presh_tic_tac_toe/_3X3Activity.java	(revision e73fc6f0adf61fcb8c15a25b2f3d129502158911)
++++ app/src/main/java/com/example/android/presh_tic_tac_toe/_3X3Activity.java	(revision 77cab5f13999c9e9565cff2de8393538b901028d)
+@@ -16,14 +16,14 @@
+ 
+     private static Button[][] game_buttons = new Button[3][3];
+ 
+-    private static boolean player1Turn = true;
++    private static boolean player1Turn;
+ 
+     private static int roundCount;
+ 
+     private static int player1Points;
+     private static int player2Points;
+ 
+-    public static boolean numOfPlayers = true;
++    public static boolean numOfPlayers;
+ 
+     private static TextView textViewPlayer1;
+     private static TextView textViewPlayer2;
+@@ -40,7 +40,7 @@
+             for (int j = 0; j < 3; j++) {
+                 String buttonID = "button_" + i + j;
+                 int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+-               game_buttons[i][j] = findViewById(resID);
++                game_buttons[i][j] = findViewById(resID);
+                 game_buttons[i][j].setOnClickListener(this);
+             }
+         }
+@@ -74,24 +74,36 @@
+         if (!((Button) v).getText().toString().equals("")) {
+             return;
+         }
+-        if (numOfPlayers){
++
++            if (numOfPlayers){
+ 
+-            do {
+-                ((Button) v).setText("X");
+-                checkForWin();
+-                player1Turn = !player1Turn;}
++                do {
++                    ((Button) v).setText("X");
++                    if (checkForWin()) {
++                        if (player1Turn) {
++                            player1Wins();
++                        } else {
++                            player2Wins();
++                        }
++                    }
++                    roundCount++;
++                    player1Turn = !player1Turn;
++                }
+                 while (player1Turn);
+                 ComputerPlays();
+ 
+-                if(ComputerPlays()){
+-                    resetBoard();
+-                }
++//                if(ComputerPlays()){
++//                    resetBoard();
++                //}
+ //                else{
+ //                    player1Turn=true;
+ //                }
+             }
+ 
+ 
++
++
++
+         else {
+ 
+             if (player1Turn) {
+@@ -99,9 +111,10 @@
+             } else {
+                 ((Button) v).setText("O");
+             }
+-        }
+-
+-        roundCount++;
++            roundCount++;
++        }
++
++
+ 
+         if (checkForWin()) {
+             if (player1Turn) {
+@@ -117,23 +130,28 @@
+ 
+     }
+ 
+-    private boolean ComputerPlays()
++    private void ComputerPlays()
+     {
+         Random rand;
+         rand = new Random();
+ 
+-      if (roundCount!=9) {
+-          int i;
+-          int j;
++        if (roundCount!=9) {
++            int i;
++            int j;
++//          String[][] field = new String[3][3];
+ 
+-          do {
+-                i = rand.nextInt( 2 );
+-                j = rand.nextInt(2);
+-              }while (!game_buttons[i][j].getText().toString().equals(""));
+-          game_buttons[i][j].setText("O");
+-          return checkForWin();
+-      }
+-      return checkForWin();
++            do {
++                i = rand.nextInt( 3 );
++                j = rand.nextInt(3);
++            }while (!game_buttons[i][j].getText().toString().equals(""));
++            game_buttons[i][j].setText("O");
++            roundCount++;
++
++//          field [i][j] = String.valueOf(game_buttons[i][j]);
++
++//          return checkForWin();
++        }
++//      return checkForWin();
+     }
+ 
+ 
+Index: app/src/main/java/com/example/android/presh_tic_tac_toe/_4x4Activity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/presh_tic_tac_toe/_4x4Activity.java	(revision e73fc6f0adf61fcb8c15a25b2f3d129502158911)
++++ app/src/main/java/com/example/android/presh_tic_tac_toe/_4x4Activity.java	(revision 77cab5f13999c9e9565cff2de8393538b901028d)
+@@ -8,6 +8,8 @@
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
++import java.util.Random;
++
+ public class _4x4Activity extends AppCompatActivity implements View.OnClickListener {
+     private static Button[][] game_buttons = new Button[4][4];
+ 
+@@ -18,7 +20,7 @@
+     private static int player1Points;
+     private static int player2Points;
+ 
+-    public static String numOfPlayers;
++    public static boolean numOfPlayers;
+ 
+     private static TextView textViewPlayer1;
+     private static TextView textViewPlayer2;
+@@ -70,14 +72,43 @@
+         if (!((Button) v).getText().toString().equals("")) {
+             return;
+         }
++        if (numOfPlayers){
+ 
+-        if (player1Turn) {
+-            ((Button) v).setText("X");
+-        } else {
+-            ((Button) v).setText("O");
+-        }
+-
+-        roundCount++;
++            do {
++                ((Button) v).setText("X");
++                if (checkForWin()) {
++                    if (player1Turn) {
++                        player1Wins();
++                    } else {
++                        player2Wins();
++                    }
++                }
++                roundCount++;
++                player1Turn = !player1Turn;
++            }
++            while (player1Turn);
++            ComputerPlays();
++
++//                if(ComputerPlays()){
++//                    resetBoard();
++            //}
++//                else{
++//                    player1Turn=true;
++//                }
++        }
++
++
++        else {
++
++            if (player1Turn) {
++                ((Button) v).setText("X");
++            } else {
++                ((Button) v).setText("O");
++            }
++            roundCount++;
++        }
++
++
+ 
+         if (checkForWin()) {
+             if (player1Turn) {
+@@ -93,6 +124,30 @@
+ 
+     }
+ 
++    private void ComputerPlays()
++    {
++        Random rand;
++        rand = new Random();
++
++        if (roundCount!=16) {
++            int i;
++            int j;
++//          String[][] field = new String[3][3];
++
++            do {
++                i = rand.nextInt( 4 );
++                j = rand.nextInt(4);
++            }while (!game_buttons[i][j].getText().toString().equals(""));
++            game_buttons[i][j].setText("O");
++            roundCount++;
++
++//          field [i][j] = String.valueOf(game_buttons[i][j]);
++
++//          return checkForWin();
++        }
++//      return checkForWin();
++    }
++
+     private boolean checkForWin() {
+         String[][] field = new String[4][4];
+ 
+@@ -111,7 +166,7 @@
+             }
+         }
+ 
+-        for (int i = 0; i < 3; i++) {
++        for (int i = 0; i < 4; i++) {
+             if (field[0][i].equals(field[1][i])
+                     && field[0][i].equals(field[2][i])
+                     && field[0][i].equals(field[3][i])
+@@ -181,8 +236,14 @@
+     }
+ 
+     private static void updatePointsText() {
+-        textViewPlayer1.setText("Player 1: " + player1Points);
+-        textViewPlayer2.setText("Player 2: " + player2Points);
++        if (numOfPlayers){
++            textViewPlayer1.setText("HUMAN: " + player1Points);
++            textViewPlayer2.setText("COMPUTER: " + player2Points);
++        }
++        else{
++            textViewPlayer1.setText("Player 1: " + player1Points);
++            textViewPlayer2.setText("Player 2: " + player2Points);
++        }
+     }
+ 
+     public static void resetBoard() {
+Index: app/src/main/java/com/example/android/presh_tic_tac_toe/_5x5Activity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/presh_tic_tac_toe/_5x5Activity.java	(revision e73fc6f0adf61fcb8c15a25b2f3d129502158911)
++++ app/src/main/java/com/example/android/presh_tic_tac_toe/_5x5Activity.java	(revision 77cab5f13999c9e9565cff2de8393538b901028d)
+@@ -8,6 +8,8 @@
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
++import java.util.Random;
++
+ public class _5x5Activity extends AppCompatActivity implements View.OnClickListener {
+     private static Button[][] game_buttons = new Button[5][5];
+ 
+@@ -18,7 +20,7 @@
+     private static int player1Points;
+     private static int player2Points;
+ 
+-    public static String numOfPlayers;
++    public static boolean numOfPlayers;
+ 
+     private static TextView textViewPlayer1;
+     private static TextView textViewPlayer2;
+@@ -68,14 +70,42 @@
+         if (!((Button) v).getText().toString().equals("")) {
+             return;
+         }
++        if (numOfPlayers){
+ 
+-        if (player1Turn) {
+-            ((Button) v).setText("X");
+-        } else {
+-            ((Button) v).setText("O");
+-        }
+-
+-        roundCount++;
++            do {
++                ((Button) v).setText("X");
++                if (checkForWin()) {
++                    if (player1Turn) {
++                        player1Wins();
++                    } else {
++                        player2Wins();
++                    }
++                }
++                roundCount++;
++                player1Turn = !player1Turn;
++            }
++            while (player1Turn);
++            ComputerPlays();
++//                if(ComputerPlays()){
++//                    resetBoard();
++            //}
++//                else{
++//                    player1Turn=true;
++//                }
++        }
++
++
++        else {
++
++            if (player1Turn) {
++                ((Button) v).setText("X");
++            } else {
++                ((Button) v).setText("O");
++            }
++            roundCount++;
++        }
++
++
+ 
+         if (checkForWin()) {
+             if (player1Turn) {
+@@ -91,6 +121,30 @@
+ 
+     }
+ 
++    private void ComputerPlays()
++    {
++        Random rand;
++        rand = new Random();
++
++        if (roundCount!=25) {
++            int i;
++            int j;
++//          String[][] field = new String[3][3];
++
++            do {
++                i = rand.nextInt( 5);
++                j = rand.nextInt(5);
++            }while (!game_buttons[i][j].getText().toString().equals(""));
++            game_buttons[i][j].setText("O");
++            roundCount++;
++
++//          field [i][j] = String.valueOf(game_buttons[i][j]);
++
++//          return checkForWin();
++        }
++//      return checkForWin();
++    }
++
+     private boolean checkForWin() {
+         String[][] field = new String[5][5];
+ 
+@@ -110,7 +164,7 @@
+             }
+         }
+ 
+-        for (int i = 0; i < 3; i++) {
++        for (int i = 0; i < 5; i++) {
+             if (field[0][i].equals(field[1][i])
+                     && field[0][i].equals(field[2][i])
+                     && field[0][i].equals(field[3][i])
+@@ -186,8 +240,14 @@
+     }
+ 
+     private static void updatePointsText() {
+-        textViewPlayer1.setText("Player 1: " + player1Points);
+-        textViewPlayer2.setText("Player 2: " + player2Points);
++        if (numOfPlayers){
++            textViewPlayer1.setText("HUMAN: " + player1Points);
++            textViewPlayer2.setText("COMPUTER: " + player2Points);
++        }
++        else{
++            textViewPlayer1.setText("Player 1: " + player1Points);
++            textViewPlayer2.setText("Player 2: " + player2Points);
++        }
+     }
+ 
+     public static void resetBoard() {
+Index: app/src/main/res/layout/activity_welcome_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_welcome_page.xml	(revision e73fc6f0adf61fcb8c15a25b2f3d129502158911)
++++ app/src/main/res/layout/activity_welcome_page.xml	(revision 77cab5f13999c9e9565cff2de8393538b901028d)
+@@ -71,21 +71,6 @@
+         android:textColor="@color/colorPrimary"
+         android:textSize="16sp" />
+ 
+-    <!--<Button-->
+-        <!--android:id="@+id/resumeButton"-->
+-        <!--android:layout_width="wrap_content"-->
+-        <!--android:layout_height="wrap_content"-->
+-
+-        <!--android:layout_alignStart="@+id/playButton"-->
+-        <!--android:layout_below="@+id/playButton"-->
+-        <!--android:layout_marginTop="7dp"-->
+-        <!--android:background="@drawable/blue_rectangle"-->
+-        <!--android:fontFamily="@font/abril_fatface"-->
+-        <!--android:gravity="center_horizontal|center"-->
+-        <!--android:onClick="resumeGame"-->
+-        <!--android:text="@string/resume_game"-->
+-        <!--android:textColor="#616161"-->
+-        <!--android:textSize="16sp" />-->
+ 
+     <Button
+         android:id="@+id/settingsButton"
+@@ -93,14 +78,29 @@
+         android:layout_height="wrap_content"
+         android:layout_alignStart="@+id/playButton"
+         android:layout_below="@+id/playButton"
+-        android:layout_marginTop="24dp"
+-        android:background="@drawable/red_rectangle"
++        android:layout_marginTop="8dp"
++        android:background="@drawable/blue_rectangle"
+         android:fontFamily="@font/abril_fatface"
+         android:gravity="center_horizontal|center"
++        android:onClick="settingsPage"
+         android:text="@string/settings"
+-        android:textColor="#616161"
++        android:textColor="@android:color/background_light"
++        android:textSize="16sp" />
++
++    <Button
++        android:id="@+id/btn_exit"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_alignStart="@+id/settingsButton"
++        android:layout_below="@+id/settingsButton"
++        android:layout_marginTop="7dp"
++        android:background="@drawable/red_rectangle"
++        android:fontFamily="@font/abril_fatface"
++        android:gravity="center_horizontal|center"
++        android:text="@string/exit_game"
++        android:textColor="@android:color/background_light"
+         android:textSize="16sp"
+-        android:onClick="settingsPage"
+-        />
++        android:onClick="exitGame"/>
++
+ </RelativeLayout>
+ 
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision e73fc6f0adf61fcb8c15a25b2f3d129502158911)
++++ app/src/main/res/values/strings.xml	(revision 77cab5f13999c9e9565cff2de8393538b901028d)
+@@ -4,7 +4,7 @@
+     <string name="p_tic">Presh\'s Tic-Tac-Toe</string>
+     <string name="what_would">What would you like to do?</string>
+     <string name="new_game">Play The Game</string>
+-    <string name="resume_game">Resume Game</string>
++    <string name="exit_game">Exit Game</string>
+     <string name="settings"> Edit My Settings</string>
+     <string name="s_settings">Settings</string>
+     <string name="players">Players</string>
