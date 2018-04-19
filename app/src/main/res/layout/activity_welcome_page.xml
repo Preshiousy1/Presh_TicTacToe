@@ -71,21 +71,6 @@
         android:textColor="@color/colorPrimary"
         android:textSize="16sp" />
 
-    <!--<Button-->
-        <!--android:id="@+id/resumeButton"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-
-        <!--android:layout_alignStart="@+id/playButton"-->
-        <!--android:layout_below="@+id/playButton"-->
-        <!--android:layout_marginTop="7dp"-->
-        <!--android:background="@drawable/blue_rectangle"-->
-        <!--android:fontFamily="@font/abril_fatface"-->
-        <!--android:gravity="center_horizontal|center"-->
-        <!--android:onClick="resumeGame"-->
-        <!--android:text="@string/resume_game"-->
-        <!--android:textColor="#616161"-->
-        <!--android:textSize="16sp" />-->
 
     <Button
         android:id="@+id/settingsButton"
@@ -93,14 +78,29 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/playButton"
         android:layout_below="@+id/playButton"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/blue_rectangle"
+        android:fontFamily="@font/abril_fatface"
+        android:gravity="center_horizontal|center"
+        android:onClick="settingsPage"
+        android:text="@string/settings"
+        android:textColor="@android:color/background_light"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/settingsButton"
+        android:layout_below="@+id/settingsButton"
+        android:layout_marginTop="7dp"
         android:background="@drawable/red_rectangle"
         android:fontFamily="@font/abril_fatface"
         android:gravity="center_horizontal|center"
-        android:text="@string/settings"
-        android:textColor="#616161"
+        android:text="@string/exit_game"
+        android:textColor="@android:color/background_light"
         android:textSize="16sp"
-        android:onClick="settingsPage"
-        />
+        android:onClick="exitGame"/>
+
 </RelativeLayout>
 

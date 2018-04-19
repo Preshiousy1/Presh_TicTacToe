@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class _4x4Activity extends AppCompatActivity implements View.OnClickListener {
     private static Button[][] game_buttons = new Button[4][4];
 
@@ -18,7 +20,7 @@ public class _4x4Activity extends AppCompatActivity implements View.OnClickListe
     private static int player1Points;
     private static int player2Points;
 
-    public static String numOfPlayers;
+    public static boolean numOfPlayers;
 
     private static TextView textViewPlayer1;
     private static TextView textViewPlayer2;
@@ -70,14 +72,43 @@ public class _4x4Activity extends AppCompatActivity implements View.OnClickListe
         if (!((Button) v).getText().toString().equals("")) {
             return;
         }
+        if (numOfPlayers){
 
-        if (player1Turn) {
-            ((Button) v).setText("X");
-        } else {
-            ((Button) v).setText("O");
+            do {
+                ((Button) v).setText("X");
+                if (checkForWin()) {
+                    if (player1Turn) {
+                        player1Wins();
+                    } else {
+                        player2Wins();
+                    }
+                }
+                roundCount++;
+                player1Turn = !player1Turn;
+            }
+            while (player1Turn);
+            ComputerPlays();
+
+//                if(ComputerPlays()){
+//                    resetBoard();
+            //}
+//                else{
+//                    player1Turn=true;
+//                }
         }
 
-        roundCount++;
+
+        else {
+
+            if (player1Turn) {
+                ((Button) v).setText("X");
+            } else {
+                ((Button) v).setText("O");
+            }
+            roundCount++;
+        }
+
+
 
         if (checkForWin()) {
             if (player1Turn) {
@@ -91,6 +122,30 @@ public class _4x4Activity extends AppCompatActivity implements View.OnClickListe
             player1Turn = !player1Turn;
         }
 
+    }
+
+    private void ComputerPlays()
+    {
+        Random rand;
+        rand = new Random();
+
+        if (roundCount!=16) {
+            int i;
+            int j;
+//          String[][] field = new String[3][3];
+
+            do {
+                i = rand.nextInt( 4 );
+                j = rand.nextInt(4);
+            }while (!game_buttons[i][j].getText().toString().equals(""));
+            game_buttons[i][j].setText("O");
+            roundCount++;
+
+//          field [i][j] = String.valueOf(game_buttons[i][j]);
+
+//          return checkForWin();
+        }
+//      return checkForWin();
     }
 
     private boolean checkForWin() {
@@ -111,7 +166,7 @@ public class _4x4Activity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             if (field[0][i].equals(field[1][i])
                     && field[0][i].equals(field[2][i])
                     && field[0][i].equals(field[3][i])
@@ -181,8 +236,14 @@ public class _4x4Activity extends AppCompatActivity implements View.OnClickListe
     }
 
     private static void updatePointsText() {
-        textViewPlayer1.setText("Player 1: " + player1Points);
-        textViewPlayer2.setText("Player 2: " + player2Points);
+        if (numOfPlayers){
+            textViewPlayer1.setText("HUMAN: " + player1Points);
+            textViewPlayer2.setText("COMPUTER: " + player2Points);
+        }
+        else{
+            textViewPlayer1.setText("Player 1: " + player1Points);
+            textViewPlayer2.setText("Player 2: " + player2Points);
+        }
     }
 
     public static void resetBoard() {

@@ -14,6 +14,7 @@ public class SettingsActivity extends AppCompatActivity {
     public static String Spinner1ItemSelected;
     public static String Spinner2ItemSelected;
     private Button btnSubmit;
+    public static boolean settingsChange;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 Spinner1ItemSelected = "" + String.valueOf(spinner1.getSelectedItem());
                 Spinner2ItemSelected = "" + String.valueOf(spinner2.getSelectedItem());
+                settingsChange = true;
                 welcome_page2();
             }
 
